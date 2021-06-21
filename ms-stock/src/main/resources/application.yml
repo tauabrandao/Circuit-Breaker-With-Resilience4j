@@ -4,6 +4,13 @@ spring:
 server:
   port: 8080
 
+resilience4j:
+  retry:
+    instances:
+      stock-price:
+        wait-duration: 2s
+        max-attempts: 2
+
 #eureka configuration
 eureka:
   client:
