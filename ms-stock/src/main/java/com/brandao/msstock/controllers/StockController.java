@@ -33,7 +33,8 @@ public class StockController {
     }
 
     @GetMapping("/price/{name}")
-    @Retry(name = "stock-price", fallbackMethod = "getMockStock")
+    //@Retry(name = "stock-price", fallbackMethod = "getMockStock")
+    @CircuitBreaker(name = "default", fallbackMethod = "getMockStock")
     public ResponseEntity<Object> getStockPrice(@PathVariable String name) throws IOException {
 
         logger.info("The instance running on port %s was called to fetch the stock details"
