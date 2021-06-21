@@ -10,6 +10,11 @@ resilience4j:
       stock-price:
         wait-duration: 2s
         max-attempts: 2
+  ratelimiter:
+    instances:
+      default:
+        limit-for-period: 2
+        limit-refresh-period: 20s
 
 #eureka configuration
 eureka:

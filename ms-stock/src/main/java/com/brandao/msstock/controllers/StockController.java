@@ -3,6 +3,7 @@ package com.brandao.msstock.controllers;
 import com.brandao.msstock.dto.StockDTO;
 import com.brandao.msstock.services.StockService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,8 @@ public class StockController {
 
     @GetMapping("/price/{name}")
     //@Retry(name = "stock-price", fallbackMethod = "getMockStock")
-    @CircuitBreaker(name = "default", fallbackMethod = "getMockStock")
+//    @CircuitBreaker(name = "default", fallbackMethod = "getMockStock")
+    @RateLimiter(name = "default")
     public ResponseEntity<Object> getStockPrice(@PathVariable String name) throws IOException {
 
         logger.info("The instance running on port %s was called to fetch the stock details"
